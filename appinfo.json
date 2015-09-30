@@ -1,0 +1,23 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "speedylee@gmail.com",
+    "longName": "Round Rain",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "Round Rain",
+    "targetPlatforms": [
+        "basalt",
+        "chalk"
+    ],
+    "uuid": "7ae590e1-d779-429e-b7e4-d71cb1752e23",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
