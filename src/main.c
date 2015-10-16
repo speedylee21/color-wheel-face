@@ -1,5 +1,4 @@
 #include <pebble.h>
-#include <stdlib.h>
 #include <types.h>
 #include <array.h>
   
@@ -85,10 +84,10 @@ static void draw_hands(GRect frame, GContext *ctx) {
 
 static void draw_color_ring(GRect bounds, GContext *ctx) {
   //draw time segments and overlaps
-  draw_arc(ctx, s_palette->all, bounds, 30, 0, s_time_segments[0]->value);
-  draw_arc(ctx, mix_colors(s_time_segments[1]->color, s_time_segments[2]->color), bounds, 30, s_time_segments[0]->value, s_time_segments[1]->value);
-  draw_arc(ctx, s_time_segments[2]->color, bounds, 30, s_time_segments[1]->value, s_time_segments[2]->value);
-  draw_arc(ctx, s_palette->none, bounds, 30, s_time_segments[2]->value, 0);
+  draw_arc(ctx, s_palette->all, bounds, 33, 0, s_time_segments[0]->value);
+  draw_arc(ctx, mix_colors(s_time_segments[1]->color, s_time_segments[2]->color), bounds, 33, s_time_segments[0]->value, s_time_segments[1]->value);
+  draw_arc(ctx, s_time_segments[2]->color, bounds, 33, s_time_segments[1]->value, s_time_segments[2]->value);
+  draw_arc(ctx, s_palette->none, bounds, 33, s_time_segments[2]->value, 0);
 }
 
 static void draw_dots(GRect frame, GContext *ctx) {
@@ -192,8 +191,11 @@ static void window_load(Window *window) {
       COLOR_FALLBACK(GColorBlack,GColorBlack)
   };
   
+  GRect bounds = layer_get_bounds(window_get_root_layer(s_window));
+  GSize bounds_size = bounds.size;
+  
   //Create main background arc layer
-  s_layer = layer_create(layer_get_bounds(window_get_root_layer(s_window)));
+  s_layer = layer_create(bounds);
   layer_add_child(window_get_root_layer(s_window), s_layer);
   layer_set_update_proc(s_layer, update_display);
   
@@ -213,18 +215,20 @@ static void window_load(Window *window) {
   layer_set_update_proc(s_date_layer, update_date);
   layer_add_child(s_layer, s_date_layer);
 
-  s_day_label = text_layer_create(GRect(48, 110, 25, 20));
+  s_day_label = text_layer_create(GRect(0, 111, bounds_size.w / 2 - 2, 20));
   text_layer_set_text(s_day_label, s_day_buffer);
   text_layer_set_background_color(s_day_label, GColorClear);
   text_layer_set_text_color(s_day_label, GColorWhite);
+  text_layer_set_text_alignment(s_day_label, GTextAlignmentRight);
   text_layer_set_font(s_day_label, fonts_get_system_font(FONT_KEY_GOTHIC_18));
 
   layer_add_child(s_date_layer, text_layer_get_layer(s_day_label));
 
-  s_num_label = text_layer_create(GRect(73, 110, 18, 20));
+  s_num_label = text_layer_create(GRect(bounds_size.w / 2 + 4, 111, bounds_size.w / 2 - 2, 20));
   text_layer_set_text(s_num_label, s_num_buffer);
   text_layer_set_background_color(s_num_label, GColorClear);
   text_layer_set_text_color(s_num_label, GColorWhite);
+  text_layer_set_text_alignment(s_num_label, GTextAlignmentLeft);
   text_layer_set_font(s_num_label, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
 
   layer_add_child(s_date_layer, text_layer_get_layer(s_num_label));

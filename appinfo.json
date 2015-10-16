@@ -3,20 +3,20 @@
     "capabilities": [
         ""
     ],
-    "companyName": "speedylee@gmail.com",
-    "longName": "Round Rain",
+    "companyName": "Cassandra Crawford",
+    "longName": "Color Wheel",
     "projectType": "native",
     "resources": {
         "media": []
     },
     "sdkVersion": "3",
-    "shortName": "Round Rain",
+    "shortName": "Color Wheel",
     "targetPlatforms": [
         "basalt",
         "chalk"
     ],
-    "uuid": "7ae590e1-d779-429e-b7e4-d71cb1752e23",
-    "versionLabel": "1.0",
+    "uuid": "1d522a63-9888-4df3-89cf-028a6f9f2509",
+    "versionLabel": "1.1",
     "watchapp": {
         "watchface": true
     }
